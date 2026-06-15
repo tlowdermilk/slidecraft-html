@@ -1,0 +1,106 @@
+{
+  "$schema": "https://amiedd.dev/schemas/moodboard-tokens/v1.json",
+  "meta": {
+    "mood": ["editorial", "warm", "mid-century"],
+    "sources": ["board-01.png", "board-02.jpg"],
+    "confidence_overall": 0.82,
+    "notes": [
+      "single-board input — no cross-image reconciliation performed",
+      "accent-ink/accent auto-adjusted from #B25E00 to #8A4A00 to reach AA (4.6:1)"
+    ]
+  },
+  "color": {
+    "surface": {
+      "value": "#FAF7F0",
+      "role": "page background",
+      "confidence": 0.9
+    },
+    "ink": {
+      "value": "#1F1B16",
+      "role": "primary text",
+      "confidence": 0.88,
+      "contrast": { "vs_surface": 15.2 }
+    },
+    "accent": {
+      "value": "#8A4A00",
+      "role": "links / primary action",
+      "confidence": 0.78
+    },
+    "accent-ink": {
+      "value": "#FFFFFF",
+      "role": "text on accent",
+      "confidence": 0.86,
+      "contrast": { "vs_accent": 4.6 }
+    }
+  },
+  "typography": {
+    "font-display": {
+      "value": "'Fraunces', Georgia, serif",
+      "confidence": 0.74,
+      "system_safe": false,
+      "fallback_only": false
+    },
+    "font-body": {
+      "value": "'Source Serif 4', Georgia, serif",
+      "confidence": 0.8,
+      "system_safe": false
+    },
+    "font-mono": {
+      "value": "ui-monospace, 'SFMono-Regular', Menlo, monospace",
+      "confidence": 0.95,
+      "system_safe": true
+    },
+    "scale": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.25rem",
+      "xl": "1.5rem",
+      "2xl": "2rem",
+      "3xl": "clamp(2.5rem, 5vw, 3.5rem)"
+    },
+    "leading": {
+      "tight": "1.2",
+      "normal": "1.5",
+      "loose": "1.75"
+    },
+    "weight": {
+      "regular": "400",
+      "bold": "700"
+    }
+  },
+  "space": {
+    "space-1": "4px",
+    "space-2": "8px",
+    "space-3": "12px",
+    "space-4": "16px",
+    "space-5": "24px",
+    "space-6": "32px",
+    "space-7": "48px",
+    "space-8": "64px"
+  },
+  "radius": {
+    "sm": "2px",
+    "md": "6px",
+    "lg": "12px"
+  },
+  "shadow": {
+    "sm": "0 1px 2px rgba(31, 27, 22, 0.06)",
+    "md": "0 2px 8px rgba(31, 27, 22, 0.10)",
+    "lg": "0 8px 24px rgba(31, 27, 22, 0.14)"
+  },
+  "motion": {
+    "fast": "120ms",
+    "base": "200ms",
+    "slow": "320ms",
+    "ease-standard": "cubic-bezier(0.2, 0, 0, 1)",
+    "ease-emphasized": "cubic-bezier(0.2, 0, 0, 1.2)"
+  },
+  "a11y": {
+    "checks": [
+      { "pair": "ink/surface", "ratio": 15.2, "level": "AAA" },
+      { "pair": "accent-ink/accent", "ratio": 4.6, "level": "AA", "note": "after auto-adjust" }
+    ],
+    "failures": []
+  }
+}

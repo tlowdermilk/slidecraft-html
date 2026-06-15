@@ -69,7 +69,7 @@ Full rules + verbatim CSS snippets: [references/zine-charter.md](references/zine
 - Cream paper + warm near-black ink default; Dracula duotone for code; no `prefers-color-scheme: dark` — dark sections are spotlights.
 - Mono micro-labels: uppercase JetBrains Mono 10–13px, letter-spacing 0.08–0.25em, prefixed by `::before` accent hairline 28–36px × 1–2px.
 - Editorial section numbering (`§ 01`, `STEP 01`) and bracketed zine asides.
-- Fluid hero scale: `font-size: clamp(54px, 9.5vw, 200px); line-height: 0.82–0.95; letter-spacing: -0.025em to -0.05em;`.
+- Fluid hero scale: `font-size: clamp(54px, 9.5vw, 200px); line-height: 0.82–0.95; letter-spacing: -0.025em to -0.05em;`. Wrap headlines on whole words — `hyphens: manual; overflow-wrap: break-word; text-wrap: balance;` — so a word like "harness" is never auto-hyphenated into "har-ness".
 - Self-contained single-file HTML, all CSS in `<head>`, Google Fonts only.
 - Tokens fenced in `<!-- TOKENS:START -->` / `<!-- TOKENS:END -->` for byte-match sync.
 

@@ -1,0 +1,23 @@
+{
+  "name": "makeitpretty-skill-validation",
+  "version": "1.0.0",
+  "description": "Deterministic validation toolchain for the Copilot skills in this repo (frontmatter, JSON Schema, and markdown linting).",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate:frontmatter": "node --test scripts/validate-frontmatter.test.mjs",
+    "validate:schema": "node --test scripts/validate-schema.test.mjs",
+    "validate:hero-wrap": "node --test scripts/validate-hero-wrap.test.mjs",
+    "lint:md": "markdownlint-cli2",
+    "validate": "npm run lint:md && npm run validate:frontmatter && npm run validate:schema && npm run validate:hero-wrap"
+  },
+  "devDependencies": {
+    "ajv": "^8",
+    "ajv-formats": "^3",
+    "markdownlint-cli2": "^0.18",
+    "yaml": "^2"
+  }
+}

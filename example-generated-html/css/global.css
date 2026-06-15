@@ -93,8 +93,11 @@ a:hover { color: var(--accent-deep); }
   line-height: 0.96;
   letter-spacing: -0.035em;
   color: var(--ink);
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  /* Wrap on whole words; never auto-hyphenate a word like "harness" into "har-ness". */
+  hyphens: manual;
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-wrap: balance;
 }
 .hero h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
 .hero-meta {

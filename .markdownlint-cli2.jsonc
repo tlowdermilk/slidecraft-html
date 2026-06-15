@@ -1,0 +1,28 @@
+{
+  // markdownlint-cli2 configuration for this repo.
+  // Self-contained (not vendored from hve-core); mirrors that markdown
+  // posture while keeping CI free of an external dependency.
+  "globs": ["**/*.md"],
+  "ignores": [
+    "node_modules/**",
+    "_site/**",
+    "example-generated-html/**", // generated sample output, not authored prose
+    ".copilot-tracking/**" // tracking artifacts are exempt by convention
+  ],
+  "config": {
+    // MD013 (line-length): prose and long URLs would churn; disable.
+    "MD013": false,
+    // MD033 (inline-HTML): SKILL/docs intentionally reference HTML tags.
+    "MD033": false,
+    // MD041 (first-line-heading): files use YAML frontmatter, not a leading H1.
+    "MD041": false,
+    // MD004 (ul-style): authored skill prose mixes `-` and `*` markers; marker
+    // style is cosmetic and the repo predates this config, so don't enforce it.
+    "MD004": false,
+    // MD024 (no-duplicate-heading): allow repeated headings (e.g. "Anti-patterns")
+    // under different parent sections; only flag duplicates that are siblings.
+    "MD024": { "siblings_only": true }
+    // MD012 (no-multiple-blanks) stays enabled to catch stray double blanks.
+    // MD032 (blanks-around-lists) stays enabled to catch unseparated lists.
+  }
+}

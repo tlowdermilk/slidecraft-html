@@ -85,7 +85,7 @@ Exactly **three** files written to the user's chosen output directory:
    - A11y report table (every pair the HTML uses).
    - `<details><summary>tokens.json</summary><pre><code>` appendix that **byte-matches `tokens.json`**.
 
-2. **`template.html`** — single self-contained file, same constraints. Layout: masthead → hero → article (`p.lead`, `h2`, body paragraphs, `blockquote.pull-quote`, `aside.sidebar`) → footer. Placeholder copy is mood-themed.
+2. **`template.html`** — single self-contained file, same constraints. Layout: masthead → hero → article (`p.lead`, `h2`, body paragraphs, `blockquote.pull-quote`, `aside.sidebar`) → footer. Placeholder copy is mood-themed. The hero headline must wrap on **whole-word boundaries** — set `hyphens: manual; overflow-wrap: break-word; word-break: normal; text-wrap: balance;` on the display heading so a word like "harness" is never auto-hyphenated into "har-ness" across two lines.
 
 3. **`tokens.json`** — standalone copy of the intermediate token model. Same bytes as the style-guide appendix.
 
@@ -111,6 +111,7 @@ Honor `prefers-reduced-motion` via the `@media` override in the `:root` block.
 - **No base64-embedded mood board images** in the output.
 - **No inline `style="…"` with raw values** — only `style="--local: var(--global)"`.
 - **No silent averaging of conflicting boards** — cluster, keep the dominant cluster, name the outlier.
+- **No auto-hyphenated display headlines** — never set `hyphens: auto` or `overflow-wrap: anywhere` on the hero/display heading. Both split whole words mid-character (e.g. "har-ness"). Headlines wrap on whole words; use `hyphens: manual; overflow-wrap: break-word;` and force intentional breaks with `<br>`, `&nbsp;`, or a `&shy;` soft hyphen.
 - **No imposed aesthetic** — this skill does not assume zine, swiss, brutalist, or any other style unless the user names one.
 
 ## 9. Differences from `moodboard-to-template`

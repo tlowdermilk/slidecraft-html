@@ -34,15 +34,20 @@ The eight non-negotiable rules. Generated HTML must satisfy every one.
 
 - **Editorial section numbering and zine asides.** Number sections with `§ 01`, `STEP 01`, etc. Use bracketed/parenthetical asides like `[ Built from references — not copied from them ]`.
 
-- **Fluid hero scale.** Headlines use `clamp()`, never fixed pixels:
+- **Fluid hero scale.** Headlines use `clamp()`, never fixed pixels, and wrap on whole words so a word like "harness" is never auto-hyphenated into "har-ness" across two lines:
 
   ```css
   .hero h1 {
     font-size: clamp(54px, 9.5vw, 200px);
     line-height: 0.82–0.95;
     letter-spacing: -0.025em to -0.05em;
+    hyphens: manual;          /* never auto-hyphenate whole words */
+    overflow-wrap: break-word; /* break only a too-long single word, no hyphen */
+    text-wrap: balance;        /* distribute multi-word headlines evenly */
   }
   ```
+
+  To force a break at a specific point, use `<br>`; to keep two words together, glue them with `&nbsp;`; for one genuinely too-long word, place a soft hyphen `&shy;` at the syllable break.
 
 - **Self-contained single-file HTML.** All CSS in `<head>`. Only external request allowed: Google Fonts (Fraunces + JetBrains Mono) with documented system fallbacks. No build step.
 

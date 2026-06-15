@@ -107,8 +107,11 @@ body {
   line-height: 0.95;
   letter-spacing: -0.04em;
   color: var(--ink);
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  /* Wrap on whole words; never auto-hyphenate a word like "harness" into "har-ness". */
+  hyphens: manual;
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-wrap: balance;
   font-variation-settings: "opsz" 144;
 }
 .hero h1 em {

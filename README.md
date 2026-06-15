@@ -14,8 +14,6 @@ Drop in a mood board — inspiration photos, screenshots, images, sketches, or v
 
 This repo is for people who want pretty presentation-style HTML without fighting PowerPoint, CSS from scratch, or the tiny goblin in their brain that says, “What if we just use another gradient?”
 
-
-
 ## Get started
 
 Read the published how-to: <https://AmieDD.github.io/slidecraft-html/>
@@ -37,6 +35,11 @@ For a visual walkthrough, follow the instruction page here: <https://AmieDD.gith
 3. Add a mood board, inspiration photo, screenshot, sketch, or short design prompt to GitHub Copilot Chat.
 4. Ask GitHub Copilot Chat to generate a self-contained HTML page.
 5. Review, refine, and customize the generated file.
+
+> [!TIP]
+> ▸ Protip
+>
+> Adding skills to a repo that's already open in VS Code? Reload the window so Copilot Chat picks them up: `Ctrl+Shift+P` → *Developer: Reload Window*.
 
 ## License
 

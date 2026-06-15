@@ -20,22 +20,24 @@ If any of these are missing, the skill handles it in [Step 0](#step-0-seed-or-ge
 ## When to Use
 
 Trigger this skill when the user:
+
 - Asks for a new "Part", "chapter", "issue", or "section" page in a digital zine
 - Pastes raw copy (headline, paragraphs, quotes, bullet evidence, code snippets) and asks for it formatted "like the others" / "in the zine style" / "matching the series"
 - Says "add the next part", "make a Part N about X", "turn this into a zine page"
 - Says "create me an HTML page about X", "make a page about X", "build an HTML page about X", "create me a plain / standalone HTML page", or any direct request to author a new page — this is the skill's core purpose. In this zine repo every page is a zine page, so even a "plain" or "standalone" request gets the zine shell. Run the Decision Gate and Step 2 survey to place it in the series; do not require the user to say the words "Part" or "zine".
 
 Do **not** use this skill for:
+
 - Edits to a single existing page (just edit directly)
 - README or docs
 - Requests where a mood board (reference images) is attached — hand off to moodboard-to-html (generic aesthetic) or moodboard-to-template (zine aesthetic)
 - Adding new shared styles to the global stylesheet (do that directly)
 - Single-page tabbed, accordion, or carousel layouts that hide inactive content via `hidden` / `display: none`. The skill's reading model is one document per Part. If a future archetype adds a stacked single-page layout (the `single-page-scrolling` archetype on the roadmap), it will use in-page anchors and stacked sections, not a tab widget.
 
-
 ## What it Produces
 
 A single self-contained `<page-prefix>-N-<slug>.html` file at the configured location that:
+
 - Links the configured shared stylesheet
 - Loads the configured display + body + mono fonts from Google Fonts
 - Uses the canonical shell: `.masthead` → hero band → body sections → bridge/closing band → `.page-nav` (prev/next pills) → `<footer>`
@@ -340,6 +342,7 @@ Rules that apply to **every** archetype:
 ### 6. Write and confirm
 
 Write the file to `{{fileLocation}}/{{pagePrefix}}-<N>-<slug>.html`. Then briefly tell the user:
+
 - Filename created
 - Archetype used
 - Prev/next wired (or note if `next` is a placeholder)
@@ -449,6 +452,7 @@ Before writing the file, run through these yes/no items. Any "no" is a fix-now, 
 * `outline: none` without a replacement focus indicator.
 * Animations without a `prefers-reduced-motion` guard at the CSS level (the bundled `default-global.css` covers this globally, so don't override it per-page).
 * `tabindex="0"` on a `<pre>` that isn't scrollable (creates a dead tab stop).
+* `hyphens: auto` or `overflow-wrap: anywhere` on `.hero h1` — splits whole words mid-character (e.g. "har-ness" across two lines). Keep the whole-word wrap contract from `default-global.css`.
 
 ## Hero Layout Rule
 
@@ -457,8 +461,17 @@ The default `.hero-grid` is a two-column layout: a large display headline on the
 * Do not restate `.hero-grid { grid-template-columns: ... }` without `minmax(0, 1fr)` on the headline track. A plain `1fr` lets the longest unbreakable word in the headline expand the track past the container, pushing `.hero-meta` off the right edge.
 * Do not set `line-height` below `0.95` on `.hero h1` when the display font is italic and serif (Fraunces, Playfair, EB Garamond). Italic descenders on "y", "g", and "j" collide with baseline punctuation on the line below at any value tighter than that.
 * Do not add `overflow: hidden` to `.hero` to mask a layout that overflows. That hides the bug instead of fixing it and can clip the focus ring on the skip-link target.
+* Do not set `hyphens: auto` or `overflow-wrap: anywhere` on `.hero h1`. Both split ordinary words mid-character — `auto` inserts a hyphen so "harness" renders as "har-" / "ness" across two lines, and `anywhere` breaks at any character with no hyphen. The headline must wrap on **whole-word boundaries** so each word stays intact on one line. Word-break behavior is part of the series look; do not loosen it per page.
 
-The bundled `default-global.css` already ships `grid-template-columns: minmax(0, 1fr) 280px`, `min-width: 0` on `.hero-grid > *`, `line-height: 0.95` on `.hero h1`, and `overflow-wrap: anywhere; hyphens: auto;` as escape hatches for headlines containing very long unbreakable words. Per-page overrides should preserve all of these.
+The bundled `default-global.css` already ships `grid-template-columns: minmax(0, 1fr) 280px`, `min-width: 0` on `.hero-grid > *`, `line-height: 0.95` on `.hero h1`, and the whole-word wrap contract `hyphens: manual; overflow-wrap: break-word; word-break: normal; text-wrap: balance;` so headline words never auto-hyphenate. Per-page overrides should preserve all of these.
+
+### Controlling where a headline wraps
+
+Because the headline wraps on whole words, a long word like "harness" always stays intact on a single line. When you want a headline to break at a **specific** spot, control it explicitly rather than reaching for `hyphens: auto`:
+
+* Insert `<br>` for a hard, intentional line break (`Humans need<br>harnesses too.`).
+* Use a non-breaking space `&nbsp;` to keep two words glued together on the same line (`harness&nbsp;workshop` so "workshop" never falls to a new line away from "harness").
+* As a last resort for one genuinely too-long word, insert a soft hyphen `&shy;` at the syllable where a break is acceptable (`har&shy;ness`). With `hyphens: manual` the browser breaks there only if needed, and otherwise renders the word whole with no hyphen.
 
 ## Editing Rules (don't drift the series)
 
