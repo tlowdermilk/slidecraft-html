@@ -24,7 +24,7 @@ Technical requirements:
 Brand direction:
 
 * Tone: thoughtful, experienced, curious, practical, technical, and human.
-* Visual feel: professional but approachable, minimal, modern, and editorial. Avoid startup hype, over-designed grids, and flashy effects.
+* Visual feel: Inspired by Bauhaus and mid-century modern design, the overall aesthetic should be clean, structured, and functional, with a focus on clarity and usability. Line work, shapes, and illustrations should be used to evoke a sense of connections, insights, and relationships. Colors should be warm, muted, and professional. Typography should be clear, readable, and modern. Headings and emphasis should use sans-serif, while body text can use a serif font for readability. Avoid overly decorative or script fonts. Avoid italics. Use a single type family with multiple weights and styles for consistency.
 * The design should suggest a person who moves between customers, product teams, engineers, research insight, product strategy, and design execution. This is a human-centered, product-focused, and technically fluent professional who is credible, practical, and worth talking to.
 * Avoid: buzzword overload, startup hype, “guru” language, excessive animation, fake metrics, fake testimonials, and over-designed portfolio grids.
 * Suggested visual metaphors: field notes, customer journey fragments, marginalia, book spines, research cards, layered product diagrams, annotated flows, subtle grid systems, quiet motion, and collaborative whiteboard artifacts.
@@ -219,14 +219,19 @@ Keep it minimal.
 Footer copy:
 © Travis Lowdermilk. UX Professional.
 
-11. Images
+11. Typeface
+Fonts will be pulled from Google Fonts.
+- Headings: "Inter" designed by Rasmus Andersson
+- Body: "IBM Plex Serif" designed by Mike Abbink and Bold Monday
+
+12. Images
 Images are located in the `docs/profile/img` folder. Use existing images for the hero headshot and book covers. Avoid adding new images unless they are already present in the current site.
 - cdc.jpg: Use for The Customer-Driven Culture book cover.
 - cdp.jpg: Use for The Customer-Driven Playbook book cover.
 - ucd.jpg: Use for User-Centered Design book cover.
 - profile.jpg: Use for the hero headshot.
 
-12. Links
+13. URLs
 When referencing these books or sites, use the following links:
 - LinkedIn: https://www.linkedin.com/in/travislowdermilk/
 - Medium: https://medium.com/@travislowdermilk
