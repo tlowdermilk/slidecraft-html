@@ -221,7 +221,7 @@ Footer copy:
 
 11. Typeface
 Fonts will be pulled from Google Fonts.
-- Headings: "Inter" designed by Rasmus Andersson
+- Titles and Headings: "Inter" designed by Rasmus Andersson
 - Body: "IBM Plex Serif" designed by Mike Abbink and Bold Monday
 
 12. Images
