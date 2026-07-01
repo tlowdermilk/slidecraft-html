@@ -29,7 +29,7 @@ Brand direction:
 * Avoid: buzzword overload, startup hype, “guru” language, excessive animation, fake metrics, fake testimonials, and over-designed portfolio grids.
 * Suggested visual metaphors: field notes, customer journey fragments, marginalia, book spines, research cards, layered product diagrams, annotated flows, subtle grid systems, quiet motion, and collaborative whiteboard artifacts.
 * Suggested palette: deep navy or charcoal, warm off-white, muted gold or amber accent, soft gray-blue secondary tones.
-* Suggested type direction: strong editorial display type for headings, highly readable sans-serif for body text, optional mono accent for small labels.
+* Suggested type direction: strong, slab, sans-serif for headings, highly readable serif for body text, optional mono accent for small labels. Avoid italics or script fonts. Use a single type family with multiple weights and styles for consistency.
 
 Overall page structure:
 
