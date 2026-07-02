@@ -234,7 +234,7 @@ Images are located in the `docs/profile/img` folder. Use existing images for the
 13. URLs
 When referencing these books or sites, use the following links:
 - LinkedIn: https://www.linkedin.com/in/travislowdermilk/
-- Medium: https://medium.com/@travislowdermilk
+- Medium: https://medium.com/@tlowdermilk
 - Instagram: https://www.instagram.com/travislowdermilk/
 - Customer-Driven Playbook downloads: https://travislowdermilk-my.sharepoint.com/:f:/p/travis/EqLhaCGuu0tCnMY-q2BHnKoB68dUdOmiL3yt5NoRwWI1nA?e=LbaIJu
 - Customer-Driven Culture: https://www.oreilly.com/library/view/the-customer-driven-culture/9781492058700/
