@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travis Lowdermilk — UX Professional &amp; Author</title>
+  <meta name="description" content="Travis Lowdermilk is a UX professional and author who helps teams understand people, frame product opportunities, and design better software.">
+  <meta name="theme-color" content="#14403c">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Travis Lowdermilk — UX Professional &amp; Author">
+  <meta property="og:description" content="I help teams understand people, frame product opportunities, and design better software — connecting customer insight, developer experience, and AI-assisted development.">
+  <meta property="og:image" content="img/profile.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Add the js hook before paint so scroll-reveal starts hidden without a flash. -->
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+
+  <style>
+    :root {
+      /* TOKENS:START */
+      /* Mood board: Bauhaus / mid-century posters — warm cream grounds, muted
+         teal, terracotta, mustard, orange, navy; black line-work + nodes. */
+
+      /* Color — light grounds */
+      --surface: #f2ecdd;          /* warm cream paper */
+      --surface-alt: #f9f4e8;      /* raised card / mat */
+      --surface-tan: #e8dec8;      /* gallery-wall band (books) */
+      --surface-deep: #14403c;     /* deep teal band */
+      --surface-deep-alt: #1a504a; /* raised panel on teal */
+      --charcoal: #22201c;         /* warm near-black */
+
+      /* Text */
+      --ink: #22201c;              /* primary text on light */
+      --ink-muted: #5c5647;        /* secondary text on light */
+      --ink-on-deep: #f4efe1;      /* text on teal / charcoal */
+      --ink-muted-on-deep: #bcc9c1;/* muted text on teal */
+
+      /* Bauhaus accents (shapes + specific text roles) */
+      --terracotta: #c0563a;       /* shape / large accent */
+      --terracotta-deep: #a8412a;  /* button ground + small label text (>=5:1) */
+      --teal: #1f7a75;             /* shape */
+      --teal-deep: #186460;        /* small label text on light */
+      --mustard: #e0a12e;          /* shape / label on teal */
+      --orange: #e07a35;           /* shape */
+      --navy: #1c3a5e;             /* shape / label */
+      --sage: #9aa886;             /* tertiary shape */
+      --blush: #dca592;            /* tertiary shape */
+      --black: #1a1a17;            /* pure Bauhaus black */
+
+      /* Lines / borders */
+      --border: #ddd3bd;
+      --border-strong: #c7bb9c;
+      --hairline: #22201c;         /* thin connection strokes (used at low alpha) */
+      --border-on-deep: rgba(244, 239, 225, .22);
+
+      /* Focus ring (overridden to cream on deep bands) */
+      --focus: #22201c;
+
+      /* Typography — Inter (headings/emphasis), IBM Plex Serif (body), IBM Plex Mono (labels) */
+      --font-display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-body: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1.0625rem;
+      --text-lg: 1.1875rem;
+      --text-xl: 1.5rem;
+      --text-2xl: clamp(1.75rem, 1.10rem + 2.6vw, 2.5rem);
+      --text-3xl: clamp(2.10rem, 1.20rem + 3.6vw, 3.1rem);
+      --text-hero: clamp(2.75rem, 1.10rem + 6.6vw, 5.25rem);
+      --leading-tight: 1.04;
+      --leading-snug: 1.28;
+      --leading-normal: 1.62;
+      --leading-loose: 1.75;
+
+      /* Spacing (4px base) */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+
+      /* Radius — crisp, geometric */
+      --radius-sm: 3px;
+      --radius-md: 6px;
+      --radius-lg: 14px;
+
+      /* Shadow — soft, warm */
+      --shadow-sm: 0 1px 2px rgba(34, 32, 28, .07), 0 1px 1px rgba(34, 32, 28, .05);
+      --shadow-md: 0 10px 26px rgba(34, 32, 28, .12);
+      --shadow-lg: 0 22px 48px rgba(34, 32, 28, .20);
+
+      /* Motion */
+      --motion-fast: 150ms;
+      --motion-base: 280ms;
+      --motion-slow: 640ms;
+      --ease-standard: cubic-bezier(.2, .6, .2, 1);
+      --ease-emphasized: cubic-bezier(.2, .8, .2, 1);
+      /* TOKENS:END */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--surface);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: var(--leading-normal);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* No italics anywhere — render emphasis as weight, per brand direction. */
+    em, i, cite, blockquote { font-style: normal; }
+
+    /* --- Skip link --- */
+    .skip-link {
+      position: absolute;
+      left: var(--space-4);
+      top: -60px;
+      z-index: 100;
+      background: var(--charcoal);
+      color: var(--ink-on-deep);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      text-decoration: none;
+      transition: top var(--motion-base) var(--ease-standard);
+    }
+    .skip-link:focus { top: var(--space-4); }
+
+    /* --- Layout --- */
+    .wrap {
+      width: 100%;
+      max-width: 1140px;
+      margin-inline: auto;
+      padding-inline: clamp(20px, 5vw, 52px);
+    }
+    .section { position: relative; padding-block: clamp(64px, 10vw, 124px); overflow: clip; }
+    .section--tight { padding-block: clamp(48px, 7vw, 84px); }
+    .measure { max-width: 62ch; }
+    .stack > * + * { margin-top: var(--space-4); }
+
+    /* --- Field-note eyebrow labels --- */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--terracotta-deep);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .eyebrow--deep { color: var(--mustard); }
+
+    /* --- Headings (Inter) --- */
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-3xl);
+      line-height: var(--leading-tight);
+      letter-spacing: -0.02em;
+      margin-top: var(--space-4);
+    }
+    .section-title--sm { font-size: var(--text-2xl); }
+    .section-intro {
+      margin-top: var(--space-5);
+      color: var(--ink-muted);
+      font-size: var(--text-lg);
+      max-width: 60ch;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 14px 22px;
+      border-radius: var(--radius-sm);
+      border: 2px solid transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform var(--motion-base) var(--ease-standard),
+                  background var(--motion-base) var(--ease-standard),
+                  color var(--motion-base) var(--ease-standard),
+                  box-shadow var(--motion-base) var(--ease-standard),
+                  border-color var(--motion-base) var(--ease-standard);
+    }
+    .btn .arrow { transition: transform var(--motion-base) var(--ease-standard); }
+    .btn:hover .arrow { transform: translateX(3px); }
+
+    .btn-primary { background: var(--terracotta-deep); color: var(--ink-on-deep); border-color: var(--terracotta-deep); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .btn-outline { background: transparent; color: var(--ink); border-color: var(--charcoal); }
+    .btn-outline:hover { transform: translateY(-2px); background: var(--charcoal); color: var(--ink-on-deep); }
+
+    /* Outline button used on the deep teal band */
+    .btn-onDeep { background: transparent; color: var(--ink-on-deep); border-color: var(--mustard); }
+    .btn-onDeep:hover { transform: translateY(-2px); background: var(--mustard); color: var(--ink); border-color: var(--mustard); }
+
+    /* --- Focus visibility --- */
+    a:focus-visible, .btn:focus-visible, button:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* --- Decorative Bauhaus shapes --- */
+    .deco { position: absolute; pointer-events: none; z-index: 0; }
+    .deco--circle { border-radius: 50%; }
+    .deco--half { border-radius: 999px 999px 0 0; }
+    .deco--quarter { border-radius: 100% 0 0 0; }
+    .deco--ring { border-radius: 50%; background: transparent !important; }
+
+    /* Faint graph-paper grid */
+    .grid-lines {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(to right, rgba(34, 32, 28, .05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(34, 32, 28, .05) 1px, transparent 1px);
+      background-size: 54px 54px;
+      -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 42%, #000 30%, transparent 80%);
+      mask-image: radial-gradient(ellipse 78% 68% at 50% 42%, #000 30%, transparent 80%);
+    }
+
+    /* Inline "connections" constellation */
+    .connect { position: absolute; pointer-events: none; z-index: 0; }
+    .connect line, .connect path { stroke: rgba(34, 32, 28, .28); stroke-width: 1.4; fill: none; }
+    .connect .node { stroke: none; }
+
+    /* ============ HERO ============ */
+    .hero { position: relative; background: var(--surface); overflow: clip; }
+    .hero .connect { top: 6%; right: -4%; width: min(620px, 60%); height: auto; opacity: .9; }
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: clamp(32px, 6vw, 72px);
+      align-items: center;
+      padding-block: clamp(72px, 12vw, 140px);
+    }
+    .hero-kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+      margin-bottom: var(--space-5);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: var(--text-hero);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+      /* Whole-word wrapping only — never auto-hyphenate the display headline. */
+      hyphens: manual;
+      overflow-wrap: break-word;
+      word-break: normal;
+      text-wrap: balance;
+    }
+    .hero-role {
+      margin-top: var(--space-5);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-xl);
+      line-height: var(--leading-snug);
+      letter-spacing: -0.01em;
+      color: var(--terracotta-deep);
+      max-width: 22ch;
+    }
+    .hero-lede {
+      margin-top: var(--space-5);
+      max-width: 54ch;
+      font-size: var(--text-lg);
+      color: var(--ink-muted);
+    }
+    .hero-actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .hero-meta {
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      line-height: 2.1;
+    }
+
+    /* Hero portrait composition */
+    .hero-figure { display: flex; justify-content: center; }
+    .compose { position: relative; width: min(340px, 80vw); aspect-ratio: 1; z-index: 2; }
+    .compose .portrait {
+      position: absolute; z-index: 2;
+      inset: 12%;
+      width: 76%; height: 76%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--surface);
+      box-shadow: var(--shadow-lg);
+    }
+    .compose .deco-half {
+      z-index: 1;
+      top: 2%; left: 12%; width: 76%; height: 38%;
+      background: var(--teal);
+      border-radius: 999px 999px 0 0;
+    }
+    .compose .deco-quarter {
+      z-index: 1;
+      bottom: 8%; left: -2%; width: 34%; height: 34%;
+      background: var(--mustard);
+      border-radius: 0 100% 0 0;
+    }
+    .compose .deco-dot-a { z-index: 3; top: 6%; right: 4%; width: 30px; height: 30px; border-radius: 50%; background: var(--terracotta); }
+    .compose .deco-dot-b { z-index: 3; bottom: 2%; right: 22%; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); }
+    .compose .deco-ring { z-index: 1; bottom: 4%; right: -6%; width: 64px; height: 64px; border: 3px solid var(--orange); border-radius: 50%; }
+    .compose .fig-label {
+      position: absolute; z-index: 3; left: -6%; top: 40%;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      letter-spacing: 0.14em; color: var(--ink-muted);
+      writing-mode: vertical-rl; transform: rotate(180deg);
+    }
+
+    /* ============ WHAT I DO ============ */
+    .cards {
+      margin-top: var(--space-7);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-5);
+    }
+    .card {
+      position: relative;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6) var(--space-5);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--motion-base) var(--ease-standard),
+                  box-shadow var(--motion-base) var(--ease-standard),
+                  border-color var(--motion-base) var(--ease-standard);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+    /* Bauhaus glyph: a circle with a half-circle counter-shape */
+    .glyph { position: relative; width: 44px; height: 44px; margin-bottom: var(--space-5); }
+    .glyph::before {
+      content: ""; position: absolute; inset: 0;
+      border-radius: 50%; background: var(--glyph-a, var(--teal));
+    }
+    .glyph::after {
+      content: ""; position: absolute; left: 0; bottom: 0;
+      width: 44px; height: 22px;
+      border-radius: 0 0 999px 999px;
+      background: var(--glyph-b, var(--terracotta));
+    }
+    .card:nth-child(1) .glyph { --glyph-a: var(--terracotta); --glyph-b: var(--mustard); }
+    .card:nth-child(2) .glyph { --glyph-a: var(--teal); --glyph-b: var(--navy); }
+    .card:nth-child(3) .glyph { --glyph-a: var(--mustard); --glyph-b: var(--orange); }
+    .card:nth-child(4) .glyph { --glyph-a: var(--navy); --glyph-b: var(--teal); }
+    .card-index { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.18em; color: var(--ink-muted); }
+    .card-title {
+      margin-top: var(--space-2);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--text-xl);
+      line-height: var(--leading-snug);
+      letter-spacing: -0.01em;
+    }
+    .card-body { margin-top: var(--space-3); color: var(--ink-muted); font-size: var(--text-base); }
+
+    /* ============ HOW I WORK — connection flow ============ */
+    .flow { position: relative; margin-top: var(--space-8); display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); }
+    .flow::before {
+      content: ""; position: absolute; z-index: 0;
+      top: 21px; left: 8%; right: 8%; height: 2px;
+      background: repeating-linear-gradient(to right, var(--border-strong) 0 10px, transparent 10px 18px);
+    }
+    .node-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .node {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: grid; place-items: center;
+      border: 4px solid var(--surface);
+      box-shadow: 0 0 0 1px var(--border-strong);
+    }
+    .node span { width: 12px; height: 12px; border-radius: 50%; background: var(--surface); }
+    .node-step:nth-child(1) .node { background: var(--terracotta); }
+    .node-step:nth-child(2) .node { background: var(--teal); }
+    .node-step:nth-child(3) .node { background: var(--mustard); }
+    .node-step:nth-child(4) .node { background: var(--orange); }
+    .node-step:nth-child(5) .node { background: var(--navy); }
+    .node-num { margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.16em; color: var(--ink-muted); }
+    .node-title { margin-top: var(--space-1); font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); }
+    .node-body { margin-top: var(--space-2); font-size: var(--text-sm); color: var(--ink-muted); max-width: 22ch; }
+
+    /* ============ BOOKS — gallery wall ============ */
+    .books { background: var(--surface-tan); }
+    .books .deco-a { top: 12%; right: 6%; width: 120px; height: 60px; background: var(--teal); border-radius: 999px 999px 0 0; opacity: .85; }
+    .books .deco-b { bottom: 10%; left: 4%; width: 40px; height: 40px; border-radius: 50%; background: var(--mustard); opacity: .85; }
+    .books-head { position: relative; z-index: 1; }
+    .book-grid {
+      position: relative; z-index: 1;
+      margin-top: var(--space-8);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(28px, 5vw, 52px);
+    }
+    .book { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .plate-label { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.18em; color: var(--ink-muted); margin-bottom: var(--space-3); }
+    .frame {
+      display: block;
+      padding: 16px 16px 20px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-lg);
+      transition: transform var(--motion-base) var(--ease-emphasized), box-shadow var(--motion-base) var(--ease-standard);
+      will-change: transform;
+    }
+    .frame:hover { transform: translateY(-8px) rotate(-0.8deg); box-shadow: 0 30px 60px rgba(34, 32, 28, .26); }
+    .frame img { display: block; width: 190px; max-width: 52vw; height: auto; }
+    .book-title { margin-top: var(--space-5); font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); line-height: var(--leading-snug); letter-spacing: -0.01em; }
+    .book-body { margin-top: var(--space-3); margin-bottom: var(--space-5); max-width: 34ch; font-size: var(--text-sm); color: var(--ink-muted); }
+    .book .btn-outline { margin-top: auto; }
+
+    /* ============ WRITING ============ */
+    .writing-list { list-style: none; margin-top: var(--space-6); max-width: 760px; }
+    .writing-item { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-4); padding: var(--space-4) 0; border-top: 1px solid var(--border); }
+    .writing-item:last-child { border-bottom: 1px solid var(--border); }
+    .writing-tag { flex: 0 0 auto; min-width: 60px; font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.16em; color: var(--teal-deep); }
+    .writing-text { flex: 1 1 320px; font-size: var(--text-lg); }
+    .writing-text a {
+      color: var(--ink); text-decoration: none;
+      background-image: linear-gradient(var(--terracotta), var(--terracotta));
+      background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 2px;
+      padding-bottom: 2px;
+      transition: color var(--motion-base) var(--ease-standard), background-size var(--motion-base) var(--ease-standard);
+    }
+    .writing-text a:hover { color: var(--terracotta-deep); background-size: 100% 3px; }
+
+    /* ============ CURRENT FOCUS — deep teal band ============ */
+    .focus { background: var(--surface-deep); color: var(--ink-on-deep); --focus: var(--ink-on-deep); }
+    .focus .deco-a { top: 15%; right: 15%; width: 90px; height: 90px; border-radius: 50%; background: var(--mustard); opacity: .9; }
+    .focus .deco-b { top: 24%; right: 13%; width: 90px; height: 45px; border-radius: 999px 999px 0 0; background: var(--terracotta); transform: rotate(180deg); }
+    .focus .deco-c { bottom: 16%; right: 9%; width: 70px; height: 70px; border: 3px solid var(--mustard); border-radius: 50%; }
+    .focus .deco-d { bottom: 34%; right: 20%; width: 16px; height: 16px; border-radius: 50%; background: var(--orange); }
+    .focus-inner { position: relative; z-index: 1; }
+    .focus .section-title { color: var(--ink-on-deep); }
+    .focus .section-intro { color: var(--ink-on-deep); }
+    .focus .focus-support { color: var(--ink-muted-on-deep); font-size: var(--text-base); }
+    .chips { margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .chip {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 10px 16px;
+      border: 1px solid var(--border-on-deep);
+      border-radius: 999px;
+      color: var(--ink-on-deep);
+    }
+    .chip::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--dot, var(--mustard)); }
+    .chip:nth-child(1) { --dot: var(--terracotta); }
+    .chip:nth-child(2) { --dot: var(--mustard); }
+    .chip:nth-child(3) { --dot: var(--orange); }
+    .chip:nth-child(4) { --dot: var(--sage); }
+    .chip:nth-child(5) { --dot: var(--blush); }
+    .chip:nth-child(6) { --dot: var(--ink-on-deep); }
+
+    /* ============ BELIEF ============ */
+    .belief-inner { position: relative; z-index: 1; }
+    .belief .deco-a { top: 8%; right: 8%; width: 120px; height: 60px; border-radius: 999px 999px 0 0; background: var(--teal); opacity: .16; }
+    .belief-copy { margin-top: var(--space-5); font-size: var(--text-lg); color: var(--ink-muted); max-width: 62ch; }
+    .quote-block {
+      margin-top: var(--space-7);
+      position: relative;
+      background: var(--terracotta-deep);
+      color: var(--ink-on-deep);
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 5vw, 52px);
+      overflow: clip;
+    }
+    .quote-block .deco-q { position: absolute; z-index: 0; bottom: -30px; right: -20px; width: 140px; height: 140px; border-radius: 50%; background: rgba(244, 239, 225, .10); }
+    .pull-quote {
+      position: relative; z-index: 1;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-2xl);
+      line-height: var(--leading-snug);
+      letter-spacing: -0.02em;
+      max-width: 26ch;
+    }
+
+    /* ============ PODCAST ============ */
+    .podcast-inner {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-6); align-items: center;
+      padding: clamp(28px, 4vw, 44px);
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+    .podcast-copy { margin-top: var(--space-4); color: var(--ink-muted); max-width: 52ch; }
+    .podcast-cta { display: flex; justify-content: flex-end; }
+
+    /* ============ ELSEWHERE ============ */
+    .links { margin-top: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); column-gap: clamp(24px, 5vw, 64px); }
+    .link-row {
+      display: flex; align-items: center; gap: var(--space-4);
+      padding: var(--space-4) 0; border-top: 1px solid var(--border);
+      color: var(--ink); text-decoration: none;
+      transition: color var(--motion-base) var(--ease-standard), padding-left var(--motion-base) var(--ease-standard);
+    }
+    .link-row .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--rowdot, var(--terracotta)); flex: 0 0 auto; }
+    .link-row:nth-child(1) { --rowdot: var(--terracotta); }
+    .link-row:nth-child(2) { --rowdot: var(--teal); }
+    .link-row:nth-child(3) { --rowdot: var(--mustard); }
+    .link-row:nth-child(4) { --rowdot: var(--orange); }
+    .link-row:nth-child(5) { --rowdot: var(--navy); }
+    .link-label { flex: 1 1 auto; font-size: var(--text-lg); }
+    .link-arrow { font-family: var(--font-mono); color: var(--ink-muted); transition: transform var(--motion-base) var(--ease-standard); }
+    .link-row:hover { color: var(--terracotta-deep); padding-left: var(--space-2); }
+    .link-row:hover .link-arrow { transform: translateX(3px); color: var(--terracotta-deep); }
+
+    /* ============ FOOTER ============ */
+    .footer { background: var(--charcoal); color: var(--ink-muted-on-deep); padding-block: var(--space-7); --focus: var(--ink-on-deep); }
+    .footer-inner { display: flex; flex-wrap: wrap; gap: var(--space-5); justify-content: space-between; align-items: center; }
+    .footer-mark { font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: 0.05em; color: var(--ink-on-deep); }
+    .footer-dots { display: inline-flex; gap: 8px; }
+    .footer-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .footer-dots span:nth-child(1) { background: var(--terracotta); }
+    .footer-dots span:nth-child(2) { background: var(--mustard); }
+    .footer-dots span:nth-child(3) { background: var(--teal); }
+    .footer-dots span:nth-child(4) { background: var(--orange); }
+
+    /* ============ Scroll reveal ============ */
+    @media (prefers-reduced-motion: no-preference) {
+      html.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity var(--motion-slow) var(--ease-standard), transform var(--motion-slow) var(--ease-standard); }
+      html.js .reveal.is-visible { opacity: 1; transform: none; }
+      html.js .reveal-delay-1 { transition-delay: 80ms; }
+      html.js .reveal-delay-2 { transition-delay: 160ms; }
+      html.js .reveal-delay-3 { transition-delay: 240ms; }
+    }
+
+    /* ============ Responsive ============ */
+    @media (max-width: 1080px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 880px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-figure { order: -1; }
+      .compose { width: min(280px, 66vw); }
+      .hero .connect { display: none; }
+      .podcast-inner { grid-template-columns: 1fr; }
+      .podcast-cta { justify-content: flex-start; }
+      /* Connection flow becomes a vertical timeline */
+      .flow { grid-template-columns: 1fr; gap: 0; }
+      .flow::before { display: none; }
+      .node-step { flex-direction: row; align-items: flex-start; text-align: left; gap: var(--space-4); padding-bottom: var(--space-6); }
+      .node-step:not(:last-child)::after {
+        content: ""; position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px;
+        background: repeating-linear-gradient(to bottom, var(--border-strong) 0 10px, transparent 10px 18px);
+      }
+      .node { flex: 0 0 auto; }
+      .node-num { margin-top: 0; }
+      .node-content { padding-top: 2px; }
+      .node-body { max-width: none; }
+      .books .book-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    /* ============ Reduced motion ============ */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .btn:hover, .card:hover, .frame:hover, .link-row:hover { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero" role="banner">
+    <svg class="connect" viewBox="0 0 480 360" data-parallax="0.06" aria-hidden="true" focusable="false">
+      <path d="M40 70 H150 V150 H250"/>
+      <path d="M250 40 V150 V250 H360"/>
+      <path d="M150 150 V240 H250"/>
+      <path d="M360 90 V250"/>
+      <path d="M40 250 H150"/>
+      <circle class="node" cx="40" cy="70" r="8" fill="var(--orange)"/>
+      <circle class="node" cx="150" cy="150" r="10" fill="var(--terracotta)"/>
+      <circle class="node" cx="250" cy="40" r="8" fill="var(--teal)"/>
+      <circle class="node" cx="250" cy="150" r="7" fill="var(--navy)"/>
+      <circle class="node" cx="360" cy="90" r="9" fill="var(--mustard)"/>
+      <circle class="node" cx="150" cy="240" r="7" fill="var(--teal)"/>
+      <circle class="node" cx="250" cy="250" r="8" fill="var(--orange)"/>
+      <circle class="node" cx="360" cy="250" r="10" fill="var(--terracotta)"/>
+      <circle class="node" cx="40" cy="250" r="7" fill="var(--mustard)"/>
+    </svg>
+
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="hero-kicker reveal">Customer insight · Product design · AI-assisted development</p>
+        <h1 class="hero-title reveal reveal-delay-1">Travis Lowdermilk</h1>
+        <p class="hero-role reveal reveal-delay-1">UX Professional. Author. Podcaster. Designer. Product Maker.</p>
+        <p class="hero-lede reveal reveal-delay-2">I help teams understand people, frame product opportunities, and design better software. My work connects customer insight, developer experience, AI-assisted development, and the practical craft of turning ambiguity into usable products.</p>
+        <div class="hero-actions reveal reveal-delay-3">
+          <a class="btn btn-primary" href="#books">Read my books <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/travislowdermilk/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+        </div>
+        <p class="hero-meta reveal reveal-delay-3">UX Research&nbsp;&middot; Product Design&nbsp;&middot; Developer Tools&nbsp;&middot; AI Adoption&nbsp;&middot; Customer Collaboration&nbsp;&middot; Product Storytelling</p>
+      </div>
+
+      <div class="hero-figure reveal reveal-delay-1">
+        <div class="compose">
+          <span class="deco deco-half" aria-hidden="true"></span>
+          <span class="deco deco-quarter" aria-hidden="true"></span>
+          <span class="deco deco-ring" aria-hidden="true"></span>
+          <span class="deco deco-dot-a" aria-hidden="true"></span>
+          <span class="deco deco-dot-b" aria-hidden="true"></span>
+          <img class="portrait" src="img/profile.jpg" width="360" height="360"
+               alt="Portrait of Travis Lowdermilk, smiling, wearing glasses and a cap.">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ======================== WHAT I DO ======================== -->
+    <section class="section" aria-labelledby="work-title">
+      <div class="wrap">
+        <p class="eyebrow reveal">Work</p>
+        <h2 class="section-title reveal" id="work-title">What I do</h2>
+
+        <div class="cards">
+          <article class="card reveal">
+            <div class="glyph" aria-hidden="true"></div>
+            <p class="card-index">01</p>
+            <h3 class="card-title">Frame the problem</h3>
+            <p class="card-body">I help teams turn ambiguous customer and business challenges into clearer product opportunities, user scenarios, and design direction.</p>
+          </article>
+          <article class="card reveal reveal-delay-1">
+            <div class="glyph" aria-hidden="true"></div>
+            <p class="card-index">02</p>
+            <h3 class="card-title">Connect teams to customers</h3>
+            <p class="card-body">I work close to customers, engineers, and product teams to understand real workflows, surface unmet needs, and reduce the distance between insight and action.</p>
+          </article>
+          <article class="card reveal reveal-delay-2">
+            <div class="glyph" aria-hidden="true"></div>
+            <p class="card-index">03</p>
+            <h3 class="card-title">Shape product experiences</h3>
+            <p class="card-body">I translate research and strategy into interaction models, concepts, prototypes, design recommendations, and product stories that teams can build from.</p>
+          </article>
+          <article class="card reveal reveal-delay-3">
+            <div class="glyph" aria-hidden="true"></div>
+            <p class="card-index">04</p>
+            <h3 class="card-title">Make AI adoption human</h3>
+            <p class="card-body">I study how AI changes software development, collaboration, trust, productivity, learning, and the way organizations understand impact.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== HOW I WORK ======================== -->
+    <section class="section section--tight" aria-labelledby="method-title">
+      <div class="grid-lines" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="eyebrow reveal">Method</p>
+        <h2 class="section-title reveal" id="method-title">How I work</h2>
+        <p class="section-intro reveal">My work spans from discovery to delivery: learning from customers, making sense of complex systems, shaping product direction, and helping cross-functional teams move with clarity.</p>
+
+        <ol class="flow reveal">
+          <li class="node-step">
+            <span class="node" aria-hidden="true"><span></span></span>
+            <div class="node-content">
+              <p class="node-num">01</p>
+              <h3 class="node-title">Discover</h3>
+              <p class="node-body">Understand users, customers, teams, workflows, constraints, and the broader system.</p>
+            </div>
+          </li>
+          <li class="node-step">
+            <span class="node" aria-hidden="true"><span></span></span>
+            <div class="node-content">
+              <p class="node-num">02</p>
+              <h3 class="node-title">Frame</h3>
+              <p class="node-body">Turn messy inputs into clear scenarios, hypotheses, product needs, and decision points.</p>
+            </div>
+          </li>
+          <li class="node-step">
+            <span class="node" aria-hidden="true"><span></span></span>
+            <div class="node-content">
+              <p class="node-num">03</p>
+              <h3 class="node-title">Concept</h3>
+              <p class="node-body">Explore interaction models, solution patterns, prototypes, and product narratives.</p>
+            </div>
+          </li>
+          <li class="node-step">
+            <span class="node" aria-hidden="true"><span></span></span>
+            <div class="node-content">
+              <p class="node-num">04</p>
+              <h3 class="node-title">Align</h3>
+              <p class="node-body">Tell the product story so designers, engineers, PMs, data scientists, leaders, and customers make shared decisions.</p>
+            </div>
+          </li>
+          <li class="node-step">
+            <span class="node" aria-hidden="true"><span></span></span>
+            <div class="node-content">
+              <p class="node-num">05</p>
+              <h3 class="node-title">Learn</h3>
+              <p class="node-body">Use feedback, product signals, and real-world adoption patterns to refine direction and improve outcomes.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================== BOOKS ======================== -->
+    <section class="section books" id="books" aria-labelledby="books-title">
+      <span class="deco deco-a" aria-hidden="true"></span>
+      <span class="deco deco-b" aria-hidden="true"></span>
+      <div class="wrap">
+        <div class="books-head">
+          <p class="eyebrow reveal">Books</p>
+          <h2 class="section-title reveal" id="books-title">Books</h2>
+          <p class="section-intro reveal">I&rsquo;ve written practical guides for product makers, researchers, designers, and developers who want to build better software with customers closer to the center.</p>
+        </div>
+
+        <div class="book-grid">
+          <article class="book reveal">
+            <a class="frame" href="https://www.oreilly.com/library/view/the-customer-driven-culture/9781492058700/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <img src="img/cdc.jpg" alt="" loading="lazy" decoding="async">
+            </a>
+            <h3 class="book-title">The Customer-Driven Culture</h3>
+            <p class="book-body">A Microsoft story about building a learning-focused organization, reducing the distance between teams and customers, and making culture change practical.</p>
+            <a class="btn btn-outline" href="https://www.oreilly.com/library/view/the-customer-driven-culture/9781492058700/" target="_blank" rel="noopener noreferrer" aria-label="View The Customer-Driven Culture on O&rsquo;Reilly">View book <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </article>
+
+          <article class="book reveal reveal-delay-1">
+            <a class="frame" href="https://www.oreilly.com/library/view/the-customer-driven-playbook/9781491981269/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <img src="img/cdp.jpg" alt="" loading="lazy" decoding="async">
+            </a>
+            <h3 class="book-title">The Customer-Driven Playbook</h3>
+            <p class="book-body">A hands-on guide for converting customer feedback into product direction through hypotheses, experiments, and sensemaking.</p>
+            <a class="btn btn-outline" href="https://www.oreilly.com/library/view/the-customer-driven-playbook/9781491981269/" target="_blank" rel="noopener noreferrer" aria-label="View The Customer-Driven Playbook on O&rsquo;Reilly">View book <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </article>
+
+          <article class="book reveal reveal-delay-2">
+            <a class="frame" href="https://www.oreilly.com/library/view/user-centered-design/9781449359812/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <img src="img/ucd.jpg" alt="" loading="lazy" decoding="async">
+            </a>
+            <h3 class="book-title">User-Centered Design</h3>
+            <p class="book-body">A developer-friendly introduction to usability, user research, and design practices that help teams create software people can actually use.</p>
+            <a class="btn btn-outline" href="https://www.oreilly.com/library/view/user-centered-design/9781449359812/" target="_blank" rel="noopener noreferrer" aria-label="View User-Centered Design on O&rsquo;Reilly">View book <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== CURRENT FOCUS ======================== -->
+    <section class="section focus" aria-labelledby="focus-title">
+      <span class="deco deco-a" data-parallax="0.05" aria-hidden="true"></span>
+      <span class="deco deco-b" aria-hidden="true"></span>
+      <span class="deco deco-c" data-parallax="0.08" aria-hidden="true"></span>
+      <span class="deco deco-d" aria-hidden="true"></span>
+      <div class="wrap focus-inner">
+        <p class="eyebrow eyebrow--deep reveal">Focus</p>
+        <h2 class="section-title reveal" id="focus-title">Current focus</h2>
+        <div class="measure stack reveal">
+          <p class="section-intro">I&rsquo;m focused on customer-connected product innovation in the age of AI: how teams identify meaningful problems, co-create with customers, design usable solutions, and understand the human impact of new tools and workflows.</p>
+          <p class="focus-support">The work is part discovery, part design strategy, part technical sensemaking, and part organizational learning. I&rsquo;m interested not only in what AI makes faster, but what it changes about collaboration, trust, quality, and the way teams learn.</p>
+        </div>
+        <div class="chips reveal">
+          <span class="chip">Customer insight</span>
+          <span class="chip">Interaction models</span>
+          <span class="chip">Product storytelling</span>
+          <span class="chip">Developer experience</span>
+          <span class="chip">AI adoption</span>
+          <span class="chip">Organizational learning</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== WORKING BELIEF ======================== -->
+    <section class="section" aria-labelledby="belief-title">
+      <span class="deco deco-a" aria-hidden="true"></span>
+      <div class="wrap belief-inner">
+        <p class="eyebrow reveal">Point of view</p>
+        <h2 class="section-title reveal" id="belief-title">A simple working belief</h2>
+        <p class="belief-copy reveal">Great products come from teams that know how to learn. The tools change. The methods evolve. But the hard part remains deeply human: asking better questions, making sense of what we hear, and turning that learning into decisions that improve people&rsquo;s lives.</p>
+        <div class="quote-block reveal">
+          <span class="deco-q" aria-hidden="true"></span>
+          <p class="pull-quote">Reduce the distance between product teams and the people they serve.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== PODCAST ======================== -->
+    <section class="section section--tight" aria-labelledby="podcast-title">
+      <div class="wrap">
+        <div class="podcast-inner reveal">
+          <div>
+            <p class="eyebrow">Conversations</p>
+            <h2 class="section-title section-title--sm" id="podcast-title">Conversations about AI and work</h2>
+            <p class="podcast-copy">I co-host <strong>ai Unprompted</strong>, a weekly podcast about AI and its impact on how we work, create, and build.</p>
+          </div>
+          <div class="podcast-cta">
+            <a class="btn btn-primary" href="https://aiunprompted.tech" target="_blank" rel="noopener noreferrer">Listen to ai Unprompted <span class="arrow" aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== ELSEWHERE ======================== -->
+    <section class="section section--tight" aria-labelledby="elsewhere-title">
+      <div class="wrap">
+        <p class="eyebrow reveal">Elsewhere</p>
+        <h2 class="section-title reveal" id="elsewhere-title">Elsewhere</h2>
+        <p class="section-intro reveal">For writing, updates, downloads, and professional context, you can find me here.</p>
+
+        <div class="links reveal">
+          <a class="link-row" href="https://www.linkedin.com/in/travislowdermilk/" target="_blank" rel="noopener noreferrer">
+            <span class="dot" aria-hidden="true"></span><span class="link-label">LinkedIn</span><span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="link-row" href="https://medium.com/@travislowdermilk" target="_blank" rel="noopener noreferrer">
+            <span class="dot" aria-hidden="true"></span><span class="link-label">Medium</span><span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="link-row" href="https://www.instagram.com/travislowdermilk/" target="_blank" rel="noopener noreferrer">
+            <span class="dot" aria-hidden="true"></span><span class="link-label">Instagram</span><span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="link-row" href="https://travislowdermilk-my.sharepoint.com/:f:/p/travis/EqLhaCGuu0tCnMY-q2BHnKoB68dUdOmiL3yt5NoRwWI1nA?e=LbaIJu" target="_blank" rel="noopener noreferrer">
+            <span class="dot" aria-hidden="true"></span><span class="link-label">Customer-Driven Playbook downloads</span><span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="link-row" href="https://aiunprompted.tech" target="_blank" rel="noopener noreferrer">
+            <span class="dot" aria-hidden="true"></span><span class="link-label">ai Unprompted</span><span class="link-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p class="footer-mark">&copy; Travis Lowdermilk. Designed with <a href="https://github.com/AmieDD/slidecraft-html" style="color: #f4efe1">slidecraft-html</a> and empowered by <a href="https://github.com/features/copilot" style="color: #f4efe1">GitHubCopilot</a></p>
+      <span class="footer-dots" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var reveals = document.querySelectorAll('.reveal');
+
+      function showAll() {
+        for (var i = 0; i < reveals.length; i++) { reveals[i].classList.add('is-visible'); }
+      }
+
+      if (reduce || !('IntersectionObserver' in window)) {
+        showAll();
+        return;
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+      reveals.forEach(function (el) { io.observe(el); });
+
+      window.addEventListener('load', function () { setTimeout(showAll, 2500); });
+
+      // Subtle parallax on decorative layers only.
+      var layers = document.querySelectorAll('[data-parallax]');
+      var ticking = false;
+
+      function update() {
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        for (var i = 0; i < layers.length; i++) {
+          var el = layers[i];
+          var speed = parseFloat(el.getAttribute('data-parallax')) || 0.06;
+          var rect = el.getBoundingClientRect();
+          var center = rect.top + rect.height / 2;
+          var offset = (center - vh / 2) * speed * -1;
+          el.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
+        }
+        ticking = false;
+      }
+
+      function onScroll() {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+    })();
+  </script>
+</body>
+</html>
